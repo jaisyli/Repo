@@ -1,6 +1,6 @@
 import { Marvel } from "./Marvel";
 
-
+// comentario
 export function MarvelList({marvelData}){
     const comic = marvelData.data.results;
     return(
