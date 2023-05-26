@@ -1,24 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import { Auth, Landing } from './components/Auth';
+import {Routes, Route, BrowserRouter} from 'react-router-dom';
+import { Home } from './components/Home';
+import { useState } from 'react';
+import ProtectedRoute from './components/ProtectedRoute';
 
-function App() {
+function App(){
+  const [ing, setIng] = useState(false);
+
+  function handleChangeIng(x){
+    setIng(x);
+    console.log(ing);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Auth changeIng={handleChangeIng}/>}/>
+      <Route path="/home" element={<ProtectedRoute ing={ing}><Home/></ProtectedRoute>}/>
+      <Route path="/landing" element={<Landing />}/>
+    </Routes>
+    </BrowserRouter>
+    
   );
 }
 
